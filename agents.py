@@ -58,7 +58,7 @@ class ResumeAgent:
             llm = ChatOpenAI(
                 model="sonar",
                 base_url="https://api.perplexity.ai",  # Important: override base URL
-                api_key="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"
+                api_key= os.getenv(sonar_key)
             )
             structured_llm = llm.with_structured_output(SonarRecommendations)
 
