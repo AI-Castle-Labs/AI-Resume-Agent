@@ -12,11 +12,16 @@ Resume -> Extend API -> data -> Scrapper/ AI Agents -> Updated Resume
 
 """
 import requests
+import os
+from dotenv import load_dotenv
 
-api_key = "sk_-gYuCSHcFt9fVzWsKj1Av"
-
+load_dotenv()
 
 def extend_api(id):
+    api_key = os.getenv("EXTEND_API_KEY")
+    if not api_key:
+        raise ValueError("EXTEND_API_KEY not found in environment variables")
+
     response = requests.post(
         "https://api.extend.ai/processor_runs",
         json={
@@ -83,7 +88,7 @@ def extend_api(id):
         },
         headers={
             "x-extend-api-version": "2025-04-21",
-            "Authorization": "Bearer sk_U-NBXpmL0ofRvYCltxoh7",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         },
     )
